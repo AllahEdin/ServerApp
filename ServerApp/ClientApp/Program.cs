@@ -8,7 +8,7 @@ namespace ClientApp
         [STAThread]
         static async Task Main(string[] args)
         {
-            await AsynchronousClient2.StartClient();
+            await new AsynchronousClient2().StartClient();
         }
     }
 }
