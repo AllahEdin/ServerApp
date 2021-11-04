@@ -1,14 +1,22 @@
-﻿using Core;
+﻿using System;
+using Core;
 
 public class AsynchronousClient3 : ClientBase2
 {
     private IStartStrategy _startStrategy;
-    private IListenStrategy _listenStrategy;
+    private IListenStrategyFactory _listenStrategyFactory;
     private ISendStrategy _sendStrategy;
+    private ILogStrategy _logStrategy;
+    private Guid? _id;
 
     public override IStartStrategy StartStrategy => _startStrategy ??= new StartWithConnectStrategy();
-    
-    public override IListenStrategy ListenStrategy => _listenStrategy ??= new CommonListenStrategy();
 
-    public override ISendStrategy SendStrategy => _sendStrategy ??= new CommonSendStrategy();
+    public override IListenStrategyFactory ListenStrategyFactory =>
+        _listenStrategyFactory ??= new ListenStrategyFactory();
+
+    public override Guid Id => _id ??= Guid.NewGuid();
+
+    public override ISendStrategy SendStrategy => _sendStrategy ??= new SendWithConfirmStrategy();
+
+    public override ILogStrategy LogStrategy => _logStrategy ??= new ColoredLogStrategy(ConsoleColor.DarkCyan, $"Client No {Guid.NewGuid().ToString()}");
 }

@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Assets.Scripts.Net;
 using Core;
+using StateObject = Core.StateObject;
 
 public class AsynchronousClient2 : ClientBase
 {
